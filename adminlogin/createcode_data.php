@@ -1,0 +1,338 @@
+<?php 
+session_start();
+$_SESSION["load"] = "-";
+include('header.php'); 
+
+
+	 
+	$name = ""; 
+	$price = "";
+
+	$searchname = "";
+	if(empty($_GET["searchname"])){
+		
+	}else{
+		$searchname = $_GET["searchname"];
+	}
+ 	  
+	$searchname2 = "";
+	if(empty($_GET["searchname2"])){
+		
+	}else{
+		$searchname2 = $_GET["searchname2"];
+	}
+
+?>  
+        
+	 																		
+										
+       <!-- page content -->
+        	<div class="right_col" role="main" style="background-color: #F5F5F7; " >
+           
+             
+             <div class=" col-lg-12 " style="  " align="left" >
+             <font color="#FFFFFF" size="3px" class="serif2"  >
+             <div style="margin-top: 1px;" > 
+                     <font size="4px" color="#FF6633" class="serif">  สร้างโค้ดส่วนลด      </font>  
+                     <br> 
+                     <font size="2px" color="#767676" class="serif">  หน้าเเรก > สร้างโค้ดส่วนลด      </font>   
+                     <div > &nbsp; </div>
+             </div> 
+             </font> 
+             </div>
+             
+            <div class="row"  >
+              <div class=" col-lg-12 "  style="margin-top: -15px;"  > 
+                <div class="x_panel"  style="background-color: #FFFFFF;  border-radius: 10px; " > 
+                 
+                  <div class=" col-lg-12 " style="background-color: #FFF; height: 38px; " align="left" >
+                  <font color="#FFFFFF" size="3px" class="serif2"  >
+                  <div style="margin-top: 6px;" > 
+                     <font size="4px" color="#000000" class="serif">  สร้างโค้ดส่วนลด      </font>   
+                  </div> 
+                  </font> 
+                  </div>
+                 
+                      <?php if(empty($_GET["page"])){ ?>
+                        
+                        
+                         <form role="form" name="frmMain" method="post" action="save_createcode_data.php" enctype="multipart/form-data" onsubmit="return validateForm()" > 
+
+							  <div class="col-md-4" style=" margin-top:  15px; " > 
+
+						   	<?php
+								$n = 8;
+								function getName($n) {
+									$characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+									$randomString = '';
+
+									for ($i = 0; $i < $n; $i++) {
+										$index = rand(0, strlen($characters) - 1);
+										$randomString .= $characters[$index];
+									}
+
+									return $randomString;
+								} 
+								?>
+						   
+						   
+							   <div class="col-md-12 "> 
+								  <div class="form-group"> 
+									 <font class="serif" size="3px" color="black" for="address"> สร้างโค้ดส่วนลด  </font>
+									 <input type="text" class="form-control" id="codeno" name="codeno"   autocomplete="off" required  style="border: 1px solid #CACACA; height: 40px;  border-radius: 5px; background-color: #FFF; "    value="<?php echo getName($n); ?>" readonly   >
+								  </div>
+							   </div>  
+  
+							   <div class="col-md-12 "> 
+								  <div class="form-group"> 
+									 <font class="serif" size="3px" color="black" for="address"> ยอดเงินส่วนลด  </font>
+									 <input type="text" class="form-control" id="price" name="price"   autocomplete="off" required  style="border: 1px solid #CACACA; height: 40px;  border-radius: 5px; background-color: #FFF; "    value="<?php echo $price; ?>"  onkeypress="return (event.charCode !=8 && event.charCode ==0 || ( event.charCode == 46 || (event.charCode >= 48 && event.charCode <= 57)))" maxlength="5"    >
+								  </div>
+							   </div>  
+							   
+							  </div> 
+							   
+							    
+							  <div class="col-md-12" > 
+							  <div class="col-lg-12" align="left"   > 
+								  <div class="form-group">     
+
+								  <button type="button" class="btn btn-primary" style="background-color: #FF6633; border-radius: 5px; width: 130px; height: 40px; border-color: #FF6633; margin-top: 15px; "  data-toggle="modal" data-target="#smallmodal" > <font color="#FFF" size="2px" class="serif1" >    เพิ่มข้อมูล   </font> </button> 
+
+								
+							  	  <a href="createcode_data.php">
+							  	  	 
+								  <button type="button" class="btn btn-primary" style="background-color: #FFF; border-radius: 5px; width: 130px;  height: 40px; border-color: #FFF; border: 1px solid  #FF6633;  margin-top: 15px;  "> <font color="#000000" size="2px" class="serif1" >  ยกเลิก  </font> </button> 
+ 
+							  	  </a>
+							   
+									  <!-- modal small -->
+									<div class="modal fade" id="smallmodal" tabindex="-1" role="dialog" aria-labelledby="smallmodalLabel" aria-hidden="true">
+									<div class="modal-dialog modal-md" role="document">
+										<div class="modal-content">
+										<div class="modal-header">
+										<h5 class="modal-title" id="smallmodalLabel"> ยืนยันทำรายกาาร </h5>
+										<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+											<span aria-hidden="true">&times;</span>
+										</button>
+										</div>
+										<div class="modal-body">
+										<div class="col-lg-12" align="center">
+										 
+											<button type="submit" class="btn btn-primary" style="background-color: #FF6633; border-radius: 5px; width: 130px; height: 40px; border-color: #FF6633;  margin-top: 15px; " > <font color="#FFF" size="2px" class="serif1" > <b>  ตกลง   </b> </font> </button> 
+									 		 
+									 
+											<button type="button" data-dismiss="modal" aria-label="Close" class="btn btn-primary" style="background-color: #CAD1DB; border-radius: 5px; width: 130px;  height: 40px; border-color: #CAD1DB; border: 1px solid  #CAD1DB;  margin-top: 15px;  "  > <font color="#000000" size="2px" class="serif1" > <b>   ไม่   </b> </font> </button> 
+
+											   
+										</div> 
+										</div> 
+										</div>
+									</div>
+									</div>
+									<!-- end modal small -->  
+ 
+								  </div> 
+							  </div> 
+							  </div> 	  
+
+							 </form>
+                   		  
+							<div class="col-md-12" >  <hr style=" border: 1px solid #C9C9C9; "> </div>
+                    
+                    
+                    	 
+                     
+                    	 
+                     		<?php 
+								$i = 1;
+								$bg = "#F8FAFD"; 
+
+								$sql = "SELECT * FROM codenumber where codeno != '' order by pk asc   ";   
+								$query = mysqli_query($con,$sql); 
+								while($objResult = mysqli_fetch_array($query))
+								{ 
+									if($bg == "#FFF"){ 
+										$bg = "#F8FAFD"; 
+									}else{  
+										$bg = "#FFF"; 
+									}  		
+							?>					
+							  <div class="col-lg-12"  align="left" style="margin-top: 15px; "  >  
+								 <div class="col-lg-12 " style="margin-top: 10px; border: 1px solid #E0E0E0; border-radius: 5px; background-color: <?php echo $bg; ?>;  " >
+										<div class="row"  >
+										<div class="col-lg-8 ">
+										<div class="form-group" style="margin-top: 15px;"  >   
+										 <div  style="margin-top: 20px;" >    
+										 <font color="black" size="3px" class="serif"  style="font-size: 14px; " >  <?php echo $i.". โค้ดส่วนลด ".$objResult["codeno"]; ?> </font>
+										 &nbsp; 
+										 <font color="black" size="3px" class="serif"  style="font-size: 14px; " >  ยอดเงินส่วนลด <?php  
+											if(!empty($objResult["price"])){
+												echo number_format(0+$objResult["price"]); 
+											}
+										 ?> </font> 
+										 [ 
+										 <font color="black" size="3px" class="serif"  style="font-size: 14px; " >    <?php  
+											if(($objResult["status"] == "ยังไม่ได้ใช้งาน")){
+												echo " <font color = 'red' > ยังไม่ได้ใช้งาน  </font> ";
+											}else{
+												echo " <font color = 'darkgreen' > ใช้งานแล้ว  </font> ";
+											}
+										 ?> </font> 
+										 ]
+										 </div>  
+										</div>  
+										</div>
+										<div class="col-lg-4 " align="right">
+										<div class="form-group" style="margin-top: 15px;"  >  
+
+										<?php  
+											if(($objResult["status"] == "ยังไม่ได้ใช้งาน")){
+										?>
+										<a  href="createcode_data.php?CusID=<?php echo $objResult["pk"];?>&page=2"   >
+										<button type="button" class="btn btn-sm btn-primary" style="background-color: #F77E51; border-radius: 5px;   border: 1px solid  #F77E51;   ">  
+										<font color="#FFF" size="3px" class="serif1" style="font-size: 13px; " > &nbsp;   เเก้ไข &nbsp;  </font> </button>
+										</a>  
+										<?php		 
+											}
+										 ?> 
+										 
+										 
+										 
+
+										</div> 
+										</div> 
+										</div> 
+								 </div> 
+							  </div>
+
+
+							 <?php $i++; } ?>
+                       
+                  		   
+                   	  <?php } ?>
+                   		    
+                   		    
+                   		    
+                   		      
+                  		         
+                       <?php  
+						if(isset($_GET["page"])){
+						if( ($_GET["page"]) == "2" ){
+						$sql = "SELECT * FROM codenumber Where  pk = '". $_GET["CusID"] ."' ";  
+						$query = mysqli_query($objCon,$sql); 
+						while($objResult = mysqli_fetch_array($query))
+						{  
+							$price = $objResult["price"];    
+							$codeno = $objResult["codeno"];    
+							$status = $objResult["status"];    
+						}  
+							 
+							if($status != "ยังไม่ได้ใช้งาน"){ 
+								echo("<script>window.location = 'createcode_data.php';</script>");
+							}
+						?>  
+						  <form role="form" name="frmMain" method="post" action="save_createcode_data_update.php" enctype="multipart/form-data" onsubmit="return validateForm()" > 
+						  <input type="hidden" name="idupdate" id="idupdate" class="form-control " value="<?php echo $_GET["CusID"]; ?>" >
+ 
+							  <div class="col-md-4" style=" margin-top:  15px; " > 
+							  <div class="col-md-12" style=" margin-top:  15px; " >  
+								  <div class="form-group"> 
+									 <font class="serif" size="3px" color="black" for="address"> สร้างโค้ดส่วนลด  </font>
+									 <input type="text" class="form-control" id="codeno" name="codeno"   autocomplete="off" required  style="border: 1px solid #CACACA; height: 40px;  border-radius: 5px; background-color: #FFF; "    value="<?php echo $codeno; ?>" readonly   >
+								  </div>
+							   </div>  
+  
+							   <div class="col-md-12 "> 
+								  <div class="form-group"> 
+									 <font class="serif" size="3px" color="black" for="address"> ยอดเงินส่วนลด  </font>
+									 <input type="text" class="form-control" id="price" name="price"   autocomplete="off" required  style="border: 1px solid #CACACA; height: 40px;  border-radius: 5px; background-color: #FFF; "    value="<?php echo $price; ?>"  onkeypress="return (event.charCode !=8 && event.charCode ==0 || ( event.charCode == 46 || (event.charCode >= 48 && event.charCode <= 57)))" maxlength="5"    >
+								  </div>
+							   </div>  
+							   
+							  </div> 
+							   
+							    
+							  <div class="col-md-12" > 
+							  <div class="col-lg-12" align="left"   > 
+								  <div class="form-group">     
+
+								  <button type="button" class="btn btn-primary" style="background-color: #FF6633; border-radius: 5px; width: 130px; height: 40px; border-color: #FF6633; margin-top: 15px; "  data-toggle="modal" data-target="#smallmodal" > <font color="#FFF" size="2px" class="serif1" >    เพิ่มข้อมูล   </font> </button> 
+
+								
+							  	  <a href="createcode_data.php">
+							  	  	 
+								  <button type="button" class="btn btn-primary" style="background-color: #FFF; border-radius: 5px; width: 130px;  height: 40px; border-color: #FFF; border: 1px solid  #FF6633;  margin-top: 15px;  "> <font color="#000000" size="2px" class="serif1" >  ยกเลิก  </font> </button> 
+ 
+							  	  </a>
+							   
+									  <!-- modal small -->
+									<div class="modal fade" id="smallmodal" tabindex="-1" role="dialog" aria-labelledby="smallmodalLabel" aria-hidden="true">
+									<div class="modal-dialog modal-md" role="document">
+										<div class="modal-content">
+										<div class="modal-header">
+										<h5 class="modal-title" id="smallmodalLabel"> ยืนยันทำรายกาาร </h5>
+										<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+											<span aria-hidden="true">&times;</span>
+										</button>
+										</div>
+										<div class="modal-body">
+										<div class="col-lg-12" align="center">
+										 
+											<button type="submit" class="btn btn-primary" style="background-color: #FF6633; border-radius: 5px; width: 130px; height: 40px; border-color: #FF6633;  margin-top: 15px; " > <font color="#FFF" size="2px" class="serif1" > <b>  ตกลง   </b> </font> </button> 
+									 		 
+									 
+											<button type="button" data-dismiss="modal" aria-label="Close" class="btn btn-primary" style="background-color: #CAD1DB; border-radius: 5px; width: 130px;  height: 40px; border-color: #CAD1DB; border: 1px solid  #CAD1DB;  margin-top: 15px;  "  > <font color="#000000" size="2px" class="serif1" > <b>   ไม่   </b> </font> </button> 
+
+											   
+										</div> 
+										</div> 
+										</div>
+									</div>
+									</div>
+									<!-- end modal small -->  
+ 
+								  </div> 
+							  </div> 
+							  </div> 	  
+
+  
+							 </form>
+                           
+                        <?php } } ?>
+                          
+                           
+                   		    
+                   		    
+                   		    
+                   		    
+                   		    
+                   		    
+                   		    
+                   		    
+                   		    
+                   		    
+                   		 
+                   		        <div class="col-lg-12">
+                   		        	<br><br><br><br> <br><br><br><br> 
+                   		        	<br><br><br><br> <br><br><br><br> 
+                   		        	<br><br><br><br> <br><br><br><br> 
+                   		        	<br><br><br><br> <br><br><br><br> 
+                   		        	<br><br><br><br> <br><br><br><br> 
+                   		        	<br><br><br><br> <br><br><br><br> 
+                   		        </div>    
+                   		   
+                </div>
+              </div>
+            </div>
+            
+             
+             
+            
+             
+                   		   
+        </div>
+ 
+<?php
+include('footer2.php');
+?>
